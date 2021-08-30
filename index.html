@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!-- saved from url=(0049)https://getbootstrap.com/docs/4.3/examples/album/ -->
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <title>Login - eMercado</title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <link href="css/login.css" rel="stylesheet">
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+
+</head>
+<!--las cajas traseras que es el cuadro verde del fondo, es para que sea mas manuable en el js-->
+
+<body>
+<main>
+
+    <div class="contenedor__todo">
+      <div class="caja__trasera">
+        <div class="caja__trasera-login">
+          <h3>¿Ya tienes cuenta aquí?</h3>
+          <p>Iniciar sesión para entrar a la página</p>
+          <button id="btn__iniciar-sesion">Iniciar Sesión</button>
+        </div>
+
+        <div class="caja__trasera-register">
+          <h3>¿Aún no tienes cuenta?</h3>
+          <p>Regístrate para que puedas iniciar sesión</p>
+          <button id="btn__registrarse">Registrarse</button>
+        </div>
+      </div>
+       <!--formularios con cada input respectivo, de login y register-->
+      <div class="contenedor__login-register">
+        <!--login-->
+        <form action="" class="formulario__login">
+
+        <h2>Iniciar Sesión</h2>
+        <input type="text" id ="email" placeholder="Correo Electrónico" required>
+        <input type="password" id="pass" placeholder="Contraseña" required>
+        <button id="login" onclick= "validar()" type="button">Entrar</button>
+      </form>
+      <!--register-->
+      <form action="" class="formulario__register">
+        <h2>Registrarse</h2>
+        <input type="text" placeholder="Nombre Completo" required>
+        <input type="text" placeholder="Correo Eletrónico" required>
+        <input type="text" placeholder="Usuario" required>
+        <input type="password" placeholder="Contraseña" required>
+        <button>Registrarse</button>
+      </form>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/init.js"></script>
+  <script src="js/login.js"></script>
+</body>
+</html>
