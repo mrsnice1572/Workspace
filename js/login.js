@@ -2,12 +2,18 @@ function validar(){
     let mail = document.getElementById("email"),value;
     let pass = document.getElementById("pass").value;
     if((mail !=="")&& (pass !=="")){
+        setUser();
         window.location.href="inicio.html";
     }else{
         alert("Debe completar los campos");
     }
 }
 
+function setUser(){
+    let nombre = document.getElementById("nombre").value;
+    localStorage.setItem("user", nombre);
+
+}
 
 document.getElementById("btn__iniciar-sesion").addEventListener("click", iniciarSesion);
 document.getElementById("btn__registrarse").addEventListener("click", register);

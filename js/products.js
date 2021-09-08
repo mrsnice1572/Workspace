@@ -1,34 +1,34 @@
-const ORDER_ASC_BY_NAME = "AZ";
-const ORDER_DESC_BY_NAME = "ZA";
-const ORDER_BY_PROD_COST = "Cost.";
+const ORDER_ASC_BY_COST = "AscCost";
+const ORDER_DESC_BY_COST = "DescCost";
+const ORDER_BY_PROD_SOLDCOUNT = "SoldCount";
 var ProductArray = []; /* define una lista vacia*/
 var currentProductArray = [];
 var currentSortCriteria = undefined;
-var minCost = undefined;
-var maxCost = undefined;
+var minSoldCount = undefined;
+var maxSoldCount = undefined;
 
 function sortProduct(criteria, array){
     let result = [];
-    if (criteria === ORDER_ASC_BY_NAME)
+    if (criteria === ORDER_ASC_BY_COST)
     {
         result = array.sort(function(a, b) {
-            if ( a.name < b.name ){ return -1; }
-            if ( a.name > b.name ){ return 1; }
+            if ( a.cost < b.cost ){ return -1; }
+            if ( a.cost > b.cost ){ return 1; }
             return 0;
         });
-    }else if (criteria === ORDER_DESC_BY_NAME){
+    }else if (criteria === ORDER_DESC_BY_COST){
         result = array.sort(function(a, b) {
-            if ( a.name > b.name ){ return -1; }
-            if ( a.name < b.name ){ return 1; }
+            if ( a.cost > b.cost ){ return -1; }
+            if ( a.cost < b.cost ){ return 1; }
             return 0;
         });
-    }else if (criteria === ORDER_BY_PROD_COST){
+    }else if (criteria === ORDER_BY_PROD_SOLDCOUNT){
         result = array.sort(function(a, b) {
-            let aCost = parseInt(a.cost);
-            let bCost = parseInt(b.cost);
+            let aSoldCount = parseInt(a.soldCount);
+            let bSoldCount = parseInt(b.soldCount);
 
-            if ( aCost > bCost ){ return -1; }
-            if ( aCost < bCost ){ return 1; }
+            if ( aSoldCount > bSoldCount ){ return -1; }
+            if ( aSoldCount < bSoldCount ){ return 1; }
             return 0;
         });
     }
@@ -42,8 +42,8 @@ function showProductList(){
     for(let i = 0; i < currentProductArray.length; i++){
         let product = currentProductArray[i];
 
-        if (((minCost == undefined) || (minCost != undefined && parseInt(product.cost) >= minCost)) &&
-           ((maxCost == undefined) || (maxCost != undefined && parseInt(product.cost) <= maxCost))){
+        if (((minSoldCount == undefined) || (minSoldCount != undefined && parseInt(product.soldCount) >= minSoldCount)) &&
+           ((maxSoldCount == undefined) || (maxSoldCount != undefined && parseInt(product.soldCount) <= maxSoldCount))){
 
             htmlContentToAppend += `
             <div class="list-group-item list-group-item-action">
@@ -93,50 +93,50 @@ document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(PRODUCTS_URL).then(function(resultObj){  /*lo tengo que procesar con un then porque lo que me devuleve un then es una promisse que se tiene que trabajar dentro de un then. Nunca salgo de la cadena de then . Se nombra el paquete que se recibe con una funcion anomima*/
         if (resultObj.status === "ok") /* se consulta si el estatus está ok*/
         {
-            sortAndShowProduct(ORDER_ASC_BY_NAME, resultObj.data);
+            sortAndShowProduct(ORDER_ASC_BY_COST, resultObj.data);
         }
     });
 
     document.getElementById("sortAsc").addEventListener("click", function(){
-        sortAndShowProduct(ORDER_ASC_BY_NAME);
+        sortAndShowProduct(ORDER_ASC_BY_COST);
     });
 
     document.getElementById("sortDesc").addEventListener("click", function(){
-        sortAndShowProduct(ORDER_DESC_BY_NAME);
+        sortAndShowProduct(ORDER_DESC_BY_COST);
     });
 
-    document.getElementById("sortByCost").addEventListener("click", function(){
-        sortAndShowProduct(ORDER_BY_PROD_COST);
+    document.getElementById("sortBySoldCount").addEventListener("click", function(){
+        sortAndShowProduct(ORDER_BY_PROD_SOLDCOUNT);
     });
 
     document.getElementById("clearRangeFilter").addEventListener("click", function(){
-        document.getElementById("rangeFilterCostMin").value = "";
-        document.getElementById("rangeFilterCostMax").value = "";
+        document.getElementById("rangeFilterSoldCountMin").value = "";
+        document.getElementById("rangeFilterSoldCountMax").value = "";
 
-        minCost = undefined;
-        maxCost = undefined;
+        minSoldCount = undefined;
+        maxSoldCount = undefined;
 
         showProductList();
     });
 
-    document.getElementById("rangeFilterCost").addEventListener("click", function(){
+    document.getElementById("rangeFilterSoldCount").addEventListener("click", function(){
         //Obtengo el mínimo y máximo de los intervalos para filtrar por el costo
         //de los productos.
-        minCost = document.getElementById("rangeFilterCostMin").value;
-        maxCost = document.getElementById("rangeFilterCostMax").value;
+        minSoldCount = document.getElementById("rangeFilterSoldCountMin").value;
+        maxSoldCount = document.getElementById("rangeFilterSoldCountMax").value;
 
-        if ((minCost != undefined) && (minCost != "") && (parseInt(minCost)) >= 0){
-            minCost = parseInt(minCost);
+        if ((minSoldCount != undefined) && (minSoldCount != "") && (parseInt(minSoldCount)) >= 0){
+            minSoldCount = parseInt(minSoldCount);
         }
         else{
-            minCost = undefined;
+            minSoldCount = undefined;
         }
 
-        if ((maxCost != undefined) && (maxCost != "") && (parseInt(maxCost)) >= 0){
-            maxCost = parseInt(maxCost);
+        if ((maxSoldCount != undefined) && (maxSoldCount != "") && (parseInt(maxSoldCount)) >= 0){
+            maxSoldCount = parseInt(maxSoldCount);
         }
         else{
-            maxCost = undefined;
+            maxSoldCount = undefined;
         }
 
         showProductList();

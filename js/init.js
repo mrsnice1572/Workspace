@@ -40,8 +40,22 @@ var getJSONData = function(url){
     });
 }
 
+
+function getUser(){
+  let nombre = localStorage.getItem("user");
+  if(nombre!= undefined && nombre!=""){
+  document.getElementById("nombreUsuario").innerHTML = "Bienvenido" +nombre;
+  }
+  else{
+    window.location.href = "index.html"
+  }
+}
+
+
+
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
+  getUser();
 });
