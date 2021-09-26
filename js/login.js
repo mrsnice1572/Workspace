@@ -10,8 +10,8 @@ function validar(){
 }
 
 function setUser(){
-    let nombre = document.getElementById("nombre").value;
-    localStorage.setItem("user", nombre);
+    let email = document.getElementById("email").value;
+    localStorage.setItem("user", email);
 
 }
 
